@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+    <form method="POST">
+        command: <input type="text" name="command"><br>
+        <input type="submit" value="Submit"><br>
+    </form><br>
+
+    <head>
+        <title>Ziggurats Debugger</title>
+    </head>
+
+    <body>
+        <h2>Game data:</h2><br>
+        <p><b>Current turn:</b> {{ turn }}</p><br>
+        
+        {% for row in display %}
+        
+        <style>
+            span {
+                font-family: monospace;
+                font-size: xx-large;
+                color: darkslategrey;
+            }
+        </style>
+        <span>{{ row }}</span><br>
+        
+        {% endfor %}
+
+    </body>
+    
+</html>
+
+
