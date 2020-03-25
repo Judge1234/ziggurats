@@ -1,4 +1,4 @@
-from .utils.board_utils import pieces, directions    
+from .utils.board_utils import pieces, directions, reset_level_mark    
 
 
 #   Checks to see if a move is within legal range.
@@ -177,3 +177,6 @@ def validate(self, source, target, command_type, SP_direction=None):
                 return True
     else:
         return False
+
+
+

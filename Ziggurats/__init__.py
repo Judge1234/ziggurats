@@ -12,12 +12,12 @@ class Board:
                                  display, \
                                  encode, \
                                  decode, \
-                                 update_game_state, \
-                                 old_update_game_state
+                                 update_game_state
                                  
     from ._movement import MV, MG, SP
     from ._parser import parse
     from ._legalities import validate, check_range_and_path
+    from ._rule_checking import check_hubris_rule
     
     def __init__(self, height, width, p1_name, p2_name):
 
@@ -32,8 +32,8 @@ class Board:
         self.player_one_turn = True
         self.current_player = self.player_one_name
         self.valid_move = False
-        self.p1_cant_move = False
-        self.p2_cant_move = False
+        self.p1_turn_data = []
+        self.p2_turn_data = []
         self.game_over = False
 
         #   Promotion squares

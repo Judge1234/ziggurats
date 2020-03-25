@@ -174,3 +174,4 @@ def recover_original_state(source_sq, target_sq, source_pc, target_pc, current_p
     target_sq.piece = target_pc
     target_sq.ownership = current_player
     target_sq.mark = allocate_mark(source_pc, p1_turn)
+

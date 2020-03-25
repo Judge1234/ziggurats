@@ -5,6 +5,7 @@ from .primary_methods import get_square_by_id
 
 def parse(self, commands):
      cmd_size = len(commands)
+     current_turn_data = self.p1_turn_data if self.player_one_turn else self.p2_turn_data
      #    Case for cmd_size == 1
      if cmd_size == 1:
           return False
@@ -20,7 +21,7 @@ def parse(self, commands):
                source = commands[0]
                target = commands[1]
                if self.validate(source, target, "MV"):
-                    print("good MV")
+                    current_turn_data.append(commands)
                     self.MV(source, target)
                     return True
                else:
@@ -30,6 +31,7 @@ def parse(self, commands):
                source = commands[0]
                target = commands[1]
                if self.validate(source, target, "MG"):
+                    current_turn_data.append(commands)
                     self.MG(source, target)
                     return True
           else:
@@ -42,6 +44,7 @@ def parse(self, commands):
                target = commands[1]
                direction = commands[3]
                if self.validate(source, target, "SP", SP_direction=direction):
+                    current_turn_data.append(commands)
                     self.SP(source, target, direction)
                     return True
           else:
@@ -65,6 +68,7 @@ def parse(self, commands):
                          self.MG(source, target)
                          source = commands[3]
                          target = commands[4]
+                         current_turn_data.append(commands)
                          self.MV(source, target)
                          return True
                
@@ -78,6 +82,7 @@ def parse(self, commands):
                     source = commands[3]
                     target = commands[4]
                     if self.validate(source, target, "MG"):
+                         current_turn_data.append(commands)
                          self.MG(source, target)
                          return True
                     else:
@@ -102,6 +107,7 @@ def parse(self, commands):
                     target = commands[4]
                     direction = commands[6]
                     if self.validate(source, target, "SP", SP_direction=direction):
+                         current_turn_data.append(commands)
                          self.SP(source, target, direction)
                          return True
                     else:
@@ -122,6 +128,7 @@ def parse(self, commands):
                     target = commands[4]
                     direction = commands[6]
                     if self.validate(source, target, "SP", SP_direction=direction):
+                         current_turn_data.append(commands)
                          self.SP(source, target, direction)
                          return True
                     else:
@@ -153,6 +160,7 @@ def parse(self, commands):
                          source = commands[6]
                          target = commands[7]
                          if self.validate(source, target, "MV"):
+                              current_turn_data.append(commands)
                               self.MV(source, target)
                               return True
                          else:
@@ -175,6 +183,7 @@ def parse(self, commands):
                          source = commands[6]
                          target = commands[7]
                          if self.validate(source, target, "MG"):
+                              current_turn_data.append(commands)
                               self.MG(source, target)
                               return True
                          else:
@@ -203,6 +212,7 @@ def parse(self, commands):
                          target = commands[7]
                          direction = commands[9]
                          if self.validate(source, target, "SP", SP_direction=direction):
+                              current_turn_data.append(commands)
                               self.SP(source, target, direction)
                               return True
                          else:
@@ -227,6 +237,7 @@ def parse(self, commands):
                          target = commands[7]
                          direction = commands[9]
                          if self.validate(source, target, "SP", SP_direction=direction):
+                              current_turn_data.append(commands)
                               self.SP(source, target, direction)
                               return True
                          else:
@@ -263,6 +274,7 @@ def parse(self, commands):
                               target = commands[10]
                               direction = commands[11]
                               if self.validate(source, target, "SP", SP_direction=direction):
+                                   current_turn_data.append(commands)
                                    self.SP(source, target, direction)
                                    return True
                          else:
