@@ -130,12 +130,10 @@ def update_game_state(self):
 
         self.check_hubris_rule()
         
-        #   OLD CODE VERSION START
         deadzone_algorithm(self.squares, self.player_one_turn, self.player_one_name, self.player_two_name)
-        #   OLD CODE VERSION END
 
-        prev_player = self.player_two_name if not self.player_one_turn else self.player_two_name
-        make_promotions(self.zig_tops, self.current_player, self.player_one_name, self.player_two_name, phase="turn_end")
+        prev_player = self.player_one_name if not self.player_one_turn else self.player_two_name
+        make_promotions(self.zig_tops, prev_player, self.player_one_name, self.player_two_name, phase="turn_end")
 
         self.valid_move = False
         self.game_state["Current Player"] = self.player_one_name if self.player_one_turn else self.player_two_name

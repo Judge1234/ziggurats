@@ -103,9 +103,9 @@ def check_range_and_path(self, max_distance, index1, index2, command_type, SP_di
             sp_sq = self.squares[x2 + i[0]][y2 + i[1]]
             opponent_deadzone = sp_sq.p2_deadzone if self.player_one_turn else sp_sq.p1_deadzone
             #   The first part of this condition is meant to prevent self-blocking
-            #   in the case of "splitting backwards"
+            #   in the case of "splitting backwards" as well as preventing re-promotion
             if sp_sq != self.squares[x1][y1] and (sp_sq.ownership != None or sp_sq.out_of_bounds) or \
-               sp_sq.mutual_deadzone or opponent_deadzone:
+               sp_sq.mutual_deadzone or opponent_deadzone or (source_sq.level == 3 and sp_sq == 3):
                 return False
 
     return True

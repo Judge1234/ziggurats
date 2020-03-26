@@ -141,14 +141,14 @@ def make_promotions(promo_squares, player, p1_name, p2_name, phase="turn_start")
                 sq.piece = pieces["promotion process"]
                 sq.promotion_process = True
                 sq.ownership = player
-                sq.mark = markers["P1_PROMO"] if player == p1_name else markers["P2_PROMO"]
+                sq.mark = markers["P2_PROMO"] if player == p1_name else markers["P1_PROMO"]
     if phase == "turn_end":
         for sq in promo_squares:
             if sq.piece == pieces["promotion process"]:
                 sq.piece = pieces["king"]
                 sq.promotion_process = False
                 sq.ownership = player
-                sq.mark = markers["P2_KING"] if player == p1_name else markers["P1_KING"]
+                sq.mark = markers["P1_KING"] if player == p1_name else markers["P2_KING"]
 
 
 
