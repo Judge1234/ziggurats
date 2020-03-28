@@ -26,10 +26,13 @@ def create_ziggurats(self, layout):
 def place_piece(self, piece, loc, owned_by):
     self.get_square_by_id(loc).piece = pieces[piece]
     if owned_by == "P1":
+        self.player_one_turn = True
         self.get_square_by_id(loc).ownership = self.player_one_name
     if owned_by == "P2":
+        self.player_one_turn = False
         self.get_square_by_id(loc).ownership = self.player_two_name
     self.get_square_by_id(loc).mark = allocate_mark(pieces[piece], self.player_one_turn)
+    self.player_one_turn = True
 
 
 #   Toggles self.player_one_turn on/ off, changes self.current_player 

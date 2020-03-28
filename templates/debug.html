@@ -13,6 +13,8 @@
     <body>
         <h2>Game data:</h2>
         <b>Current turn:</b> {{ turn }}<br>
+
+        <!-- MAIN GAME BOARD DISPLAY -->
         
         {% for row in display %}
         
@@ -27,12 +29,13 @@
         
         {% endfor %}
 
+        <!-- GAME HISTORY DISPLAY -->
+
     </body>
     <style>
         div.history {
             position: fixed;
             right: 0;
-            
             bottom: 0;
             width: 500px;
             height: 670px;
@@ -65,6 +68,8 @@
             border: 3px solid black;
         }
     </style>
+
+        <!-- ACTIVE MATERIALS DISPLAY -->
 
     <div class="pieces">
         <b>Material:</b><br><br>

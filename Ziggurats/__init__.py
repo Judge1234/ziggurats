@@ -47,6 +47,7 @@ class Board:
 
         #   debug.html template display members
         self.template_data = []
+        self.move_history = []
         self.display_data = {}
         
         #   Squares are generated here
@@ -104,7 +105,6 @@ class Board:
                     sq_index_list.append(self.squares[i][j].index)
                     row.append(self.squares[i][j])
             self.gameplay_squares.append(row)
-        
 
         #   Zipping alphanumeric_indices and sq_index_list into self.index_mapping
         #   Ex: "A1" matches with [1, 1] (not [0, 0], which is out of bounds)
