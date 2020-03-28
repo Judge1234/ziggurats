@@ -11,23 +11,70 @@
     </head>
 
     <body>
-        <h2>Game data:</h2><br>
-        <p><b>Current turn:</b> {{ turn }}</p><br>
+        <h2>Game data:</h2>
+        <b>Current turn:</b> {{ turn }}<br>
         
         {% for row in display %}
         
         <style>
-            span {
+            span.display {
                 font-family: monospace;
                 font-size: xx-large;
                 color: darkslategrey;
             }
         </style>
-        <span>{{ row }}</span><br>
+        <span class="display">{{ row }}</span><br>
         
         {% endfor %}
 
     </body>
+    <style>
+        div.history {
+            position: fixed;
+            right: 0;
+            
+            bottom: 0;
+            width: 500px;
+            height: 670px;
+            border: 3px solid black;
+        }
+    </style>
+
+    <div class="history">
+        <b>Game History:</b><br><br>
+        {% for move in game_history %}
+        <style>
+            span.history {
+                font-family: 'Times New Roman', Times, serif;
+                font-size: large;
+                color: darkslategrey;
+            }
+        </style>
+        
+        <span class="history">{{ move }}</span><br>
+        {% endfor %}
+    </div>
+
+    <style>
+        div.pieces {
+            position: absolute;
+            bottom: 0;
+            right: 503px;
+            width: 225px;
+            height: 670px;
+            border: 3px solid black;
+        }
+    </style>
+
+    <div class="pieces">
+        <b>Material:</b><br><br>
+        {% for key, value in pieces.items() %}
+
+        {{ key }}: {{ value }} <br>
+
+        {% endfor %}
+        
+    </div>
     
 </html>
 

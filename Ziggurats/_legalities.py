@@ -1,6 +1,7 @@
 from .utils.board_utils import pieces, directions, reset_level_mark    
 
 
+
 #   Checks to see if a move is within legal range.
 #   Also checks to see if a piece's path is blocked (in the case of all commands)
 #   Used in Board.validate()

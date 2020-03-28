@@ -10,14 +10,13 @@ class Board:
                                  place_piece, \
                                  change_turns, \
                                  display, \
-                                 encode, \
-                                 decode, \
                                  update_game_state
                                  
     from ._movement import MV, MG, SP
     from ._parser import parse
     from ._legalities import validate, check_range_and_path
-    from ._rule_checking import check_hubris_rule
+    from ._rule_checking import check_hubris_rule, check_unholy_structs_rule
+    from ._data_collection import collect_data
     
     def __init__(self, height, width, p1_name, p2_name):
 
@@ -46,8 +45,9 @@ class Board:
         self.alpha_markers = []
         self.numeric_markers = []
 
-        #   debug.html template display member
+        #   debug.html template display members
         self.template_data = []
+        self.display_data = {}
         
         #   Squares are generated here
         for i in range(self.height):
@@ -94,6 +94,7 @@ class Board:
         for letter in self.alpha_markers:
             for number in self.numeric_markers:
                 alphanumeric_indices.append(letter + str(number))
+        
 
         #   Creating a list of the indices of all in-bounds squares
         for i in range(self.height):
@@ -103,6 +104,7 @@ class Board:
                     sq_index_list.append(self.squares[i][j].index)
                     row.append(self.squares[i][j])
             self.gameplay_squares.append(row)
+        
 
         #   Zipping alphanumeric_indices and sq_index_list into self.index_mapping
         #   Ex: "A1" matches with [1, 1] (not [0, 0], which is out of bounds)

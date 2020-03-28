@@ -91,7 +91,7 @@ def deadzone_algorithm(squares, player_one_turn, p1_name, p2_name):
             squares[i][j].p2_deadzone = False
             squares[i][j].mutual_deadzone = False
             if squares[i][j].piece == pieces["no piece"]:
-                squares[i][j].ownership = None          # CAREFUL!!!
+                squares[i][j].ownership = None
                 reset_level_mark(squares[i][j])
 
     # Pass 2: create new deadzones
@@ -102,20 +102,24 @@ def deadzone_algorithm(squares, player_one_turn, p1_name, p2_name):
             current_square = squares[i][j]
             for delta in deltas:
                 neighbour = squares[i + delta[0]][j + delta[1]]
-                if neighbour.ownership == p1_name:
+                #   Pieces undergoing promotion do not create deadzones 
+                if neighbour.ownership == p1_name and neighbour.piece != pieces["no piece"] \
+                    and neighbour.piece != pieces["promotion process"]:
                     p1_supports += 1
-                if neighbour.ownership == p2_name:
+                if neighbour.ownership == p2_name and neighbour.piece != pieces["no piece"] \
+                    and neighbour.piece != pieces["promotion process"]:
                     p2_supports += 1
             if p1_supports == 2 and p2_supports == 2:
                 current_square.mutual_deadzone = True
                 current_square.mark = markers["MUTUAL_DEADZONE"]
                 break
-            if p1_supports >= 2:
+            
+            if p1_supports >= 2 and current_square.ownership != p1_name:
                 current_square.p1_deadzone = True
                 if current_square.ownership == p2_name and current_square.piece != ["no piece"]:
                     current_square.ownership = p1_name
                     current_square.piece = pieces["no piece"]
-                    current_square.mark = markers["P1_DEADZONE"]
+                    #current_square.mark = markers["P1_DEADZONE"]
                 if current_square.ownership == p1_name and current_square.piece != ["no piece"]:
                     allocate_mark(current_square.piece, player_one_turn)
 
@@ -124,7 +128,7 @@ def deadzone_algorithm(squares, player_one_turn, p1_name, p2_name):
                 if current_square.ownership == p1_name and current_square.piece != ["no piece"]:
                     current_square.ownership = p2_name
                     current_square.piece = pieces["no piece"]
-                    current_square.mark = markers["P2_DEADZONE"]
+                    #current_square.mark = markers["P2_DEADZONE"]
                 if current_square.ownership == p2_name and current_square.piece != ["no piece"]:
                     allocate_mark(current_square.piece, player_one_turn)
             
@@ -140,7 +144,7 @@ def make_promotions(promo_squares, player, p1_name, p2_name, phase="turn_start")
             if sq.piece not in [0, 5]:
                 sq.piece = pieces["promotion process"]
                 sq.promotion_process = True
-                sq.ownership = player
+                sq.ownership = p1_name if player == p2_name else p1_name
                 sq.mark = markers["P2_PROMO"] if player == p1_name else markers["P1_PROMO"]
     if phase == "turn_end":
         for sq in promo_squares:
